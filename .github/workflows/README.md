@@ -2,47 +2,38 @@
 
 ## Publish Workflow
 
-The `publish.yml` workflow automatically builds and publishes the Python package when you create a new version tag.
+The `publish.yml` workflow automatically builds and publishes the Python package to GitHub Packages when you create a new version tag.
 
 ### How It Works
 
 1. **Trigger**: Runs when you push a tag matching `v*` (e.g., `v1.0.0`, `v1.2.3`)
 2. **Build**: Builds the Python package from the `python/` directory
 3. **Publish**:
-   - Uploads to PyPI (if `PYPI_API_TOKEN` secret is configured)
-   - Falls back to TestPyPI (if `TEST_PYPI_API_TOKEN` is configured)
+   - **Primary**: Uploads to GitHub Packages (uses automatic `GITHUB_TOKEN`)
+   - **Optional**: Also uploads to PyPI (if `PYPI_API_TOKEN` secret is configured)
 4. **Release**: Creates a GitHub release with the built package files
 
 ### Setup Instructions
 
-#### 1. Create PyPI API Token
+#### No Setup Required for GitHub Packages!
 
-**For public PyPI (recommended):**
+The workflow automatically publishes to GitHub Packages using the built-in `GITHUB_TOKEN`. No secrets needed!
+
+#### Optional: Also Publish to PyPI
+
+If you want to also publish to public PyPI:
 
 1. Go to https://pypi.org/manage/account/token/
 2. Create a new API token
 3. Scope: "Entire account" or specific to `cajias-linter-configs`
 4. Copy the token (starts with `pypi-...`)
+5. Go to your repository on GitHub
+6. Navigate to: **Settings** → **Secrets and variables** → **Actions**
+7. Click **New repository secret**
+8. Name: `PYPI_API_TOKEN`
+9. Value: (paste your token)
 
-**For TestPyPI (testing):**
-
-1. Go to https://test.pypi.org/manage/account/token/
-2. Create a new API token
-3. Copy the token
-
-#### 2. Add Secrets to GitHub Repository
-
-1. Go to your repository on GitHub
-2. Navigate to: **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret**
-4. Add these secrets:
-
-| Secret Name | Value | Required |
-|-------------|-------|----------|
-| `PYPI_API_TOKEN` | Your PyPI token | For publishing to PyPI |
-| `TEST_PYPI_API_TOKEN` | Your TestPyPI token | For testing (optional) |
-
-#### 3. Publishing a New Version
+### Publishing a New Version
 
 ```bash
 # 1. Update version in python/pyproject.toml and python/lint_configs/__init__.py
@@ -58,8 +49,34 @@ git push origin v1.0.1
 
 # 4. GitHub Actions will automatically:
 #    - Build the package
-#    - Publish to PyPI
+#    - Publish to GitHub Packages
 #    - Create a GitHub Release
+#    - (Optional) Publish to PyPI if token is configured
+```
+
+### Installing from GitHub Packages
+
+Users need to configure pip to use GitHub Packages:
+
+**One-time setup:**
+```bash
+# Authenticate with GitHub (creates ~/.pypirc)
+pip config set global.extra-index-url https://pypi.org/simple/
+
+# For private repos, you'll need a Personal Access Token (PAT)
+# with 'read:packages' scope
+```
+
+**Install the package:**
+```bash
+pip install --index-url https://pypi.pkg.github.com/cajias/simple/ cajias-linter-configs
+```
+
+**Or in requirements-dev.txt:**
+```
+--index-url https://pypi.pkg.github.com/cajias/simple/
+--extra-index-url https://pypi.org/simple/
+cajias-linter-configs>=1.0.0
 ```
 
 ### Manual Triggering

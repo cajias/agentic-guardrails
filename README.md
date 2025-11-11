@@ -43,35 +43,34 @@ Comprehensive linting for Python projects using:
 
 ## Quick Start
 
-### Method 1: Pip Package (Recommended)
+### Method 1: Pip Package from GitHub Packages (Recommended)
 
-Install the configuration package and reference it:
+Install the configuration package from GitHub Packages:
 
 ```bash
-# Install the package
-pip install cajias-linter-configs
+# Install from GitHub Packages
+pip install --index-url https://pypi.pkg.github.com/cajias/simple/ cajias-linter-configs
 
-# Then in your pyproject.toml, extend the config
+# Or add to requirements-dev.txt:
+# --index-url https://pypi.pkg.github.com/cajias/simple/
+# --extra-index-url https://pypi.org/simple/
+# cajias-linter-configs>=1.0.0
 ```
+
+Then in your `pyproject.toml`:
 
 ```toml
 [tool.ruff]
-extend = "pyproject-linters.toml"  # Ruff will find it in site-packages
-
-# Or use the Python API to get the path
-```
-
-```python
-from lint_configs import get_python_config_path
-print(get_python_config_path())
+extend = "python/pyproject-linters.toml"  # Ruff finds it in site-packages
 ```
 
 **Benefits:**
+- No external accounts needed (uses GitHub)
 - Version controlled: `cajias-linter-configs==1.0.0`
 - Easy updates: `pip install --upgrade cajias-linter-configs`
-- No git submodules
-- Works in CI/CD out of the box
-- Professional approach used by major organizations
+- Works with private repositories
+- Free unlimited storage
+- Automatic publishing via GitHub Actions
 
 ### Method 2: Direct Copy (Simplest)
 
@@ -389,9 +388,9 @@ But create tickets to gradually improve legacy code.
 
 ### Automated Publishing with GitHub Actions (Recommended)
 
-The repository includes a GitHub Actions workflow that automatically publishes new versions.
+The repository includes a GitHub Actions workflow that automatically publishes to GitHub Packages.
 
-**Quick start:**
+**Quick start (no setup required!):**
 
 ```bash
 # 1. Update version number
@@ -405,11 +404,14 @@ git push origin v1.0.1
 
 # 3. GitHub Actions automatically:
 #    ✅ Builds the package
-#    ✅ Publishes to PyPI
+#    ✅ Publishes to GitHub Packages
 #    ✅ Creates a GitHub Release
+#    ✅ (Optional) Also publishes to PyPI if token is set
 ```
 
-**Setup (one-time):**
+**No setup required!** GitHub Packages uses the automatic `GITHUB_TOKEN`.
+
+**Optional: Also publish to PyPI:**
 
 1. Create a PyPI API token at https://pypi.org/manage/account/token/
 2. Add it to GitHub repository secrets as `PYPI_API_TOKEN`
@@ -417,47 +419,43 @@ git push origin v1.0.1
 
 ### Manual Publishing
 
-If you prefer to publish manually:
+#### To GitHub Packages:
 
 ```bash
-# Navigate to the Python directory
 cd python/
 
-# 1. Update version number
+# 1. Update version
 # Edit pyproject.toml and lint_configs/__init__.py
 
 # 2. Build the package
 python -m build
 
-# 3. Upload to TestPyPI first (recommended)
-twine upload --repository testpypi dist/*
+# 3. Publish to GitHub Packages
+export GITHUB_TOKEN=your_personal_access_token
+twine upload --repository-url https://pypi.pkg.github.com/cajias dist/*
 
-# 4. Test installation from TestPyPI
-pip install --index-url https://test.pypi.org/simple/ cajias-linter-configs
-
-# 5. If all looks good, upload to PyPI
-twine upload dist/*
-
-# 6. Tag the release (from repo root)
+# 4. Tag the release (from repo root)
 cd ..
 git tag v1.0.0
 git push origin v1.0.0
 ```
 
-### Private PyPI Server
-
-For private organizations, use a private PyPI server:
+#### To PyPI (public):
 
 ```bash
-cd python/  # Navigate to Python directory
+cd python/
 
-# Option 1: Use your organization's private PyPI
-twine upload --repository-url https://pypi.yourorg.com dist/*
+# 1. Build
+python -m build
 
-# Option 2: Use GitHub Packages
-# Configure in pyproject.toml and use gh CLI
+# 2. Upload to TestPyPI first (recommended)
+twine upload --repository testpypi dist/*
 
-# Option 3: Use AWS CodeArtifact, JFrog Artifactory, etc.
+# 3. Test installation
+pip install --index-url https://test.pypi.org/simple/ cajias-linter-configs
+
+# 4. If all looks good, upload to PyPI
+twine upload dist/*
 ```
 
 ### Alternative: Install from Git

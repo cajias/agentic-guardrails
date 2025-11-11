@@ -38,25 +38,26 @@ jobs:
           cd python
           twine check dist/*
 
-      - name: Publish to PyPI
-        # Only publish if PYPI_API_TOKEN secret is set
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+      - name: Publish to GitHub Packages
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          TWINE_USERNAME: ${{ github.actor }}
+          TWINE_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd python
+          twine upload --repository-url https://pypi.pkg.github.com/${{ github.repository_owner }} dist/*
+          echo "✅ Published to GitHub Packages!"
+
+      - name: Publish to PyPI (Optional)
+        # Only publish to PyPI if PYPI_API_TOKEN secret is set
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && secrets.PYPI_API_TOKEN
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
           cd python
-          twine upload dist/* || echo "::warning::PyPI upload failed. Set PYPI_API_TOKEN secret to publish."
-
-      - name: Publish to TestPyPI
-        # Publish to TestPyPI on manual trigger or if PyPI token not set
-        if: github.event_name == 'workflow_dispatch' || !secrets.PYPI_API_TOKEN
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        run: |
-          cd python
-          twine upload --repository testpypi dist/* || echo "::warning::TestPyPI upload skipped. No TEST_PYPI_API_TOKEN secret."
+          twine upload dist/*
+          echo "✅ Also published to PyPI!"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -65,13 +66,18 @@ jobs:
           files: python/dist/*
           generate_release_notes: true
           body: |
-            ## Installation
+            ## Installation from GitHub Packages
 
             ```bash
+            # Configure pip to use GitHub Packages (one-time setup)
+            pip config set global.index-url https://pypi.pkg.github.com/${{ github.repository_owner }}/simple/
+            pip config set global.extra-index-url https://pypi.org/simple/
+
+            # Install the package
             pip install cajias-linter-configs==${{ github.ref_name }}
             ```
 
-            Or install from this release:
+            Or install directly from this release:
             ```bash
             pip install git+https://github.com/${{ github.repository }}.git@${{ github.ref_name }}#subdirectory=python
             ```
@@ -83,6 +89,6 @@ jobs:
 
       - name: Display installation instructions
         run: |
-          echo "::notice::✅ Package built successfully!"
+          echo "::notice::✅ Package published to GitHub Packages!"
           echo "::notice::📦 Version: ${GITHUB_REF#refs/tags/}"
-          echo "::notice::Install with: pip install cajias-linter-configs==${GITHUB_REF#refs/tags/v}"
+          echo "::notice::Install with: pip install --index-url https://pypi.pkg.github.com/${{ github.repository_owner }}/simple/ cajias-linter-configs==${GITHUB_REF#refs/tags/v}"
