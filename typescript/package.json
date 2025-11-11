@@ -1,0 +1,60 @@
+{
+  "name": "@agentic-guardrails/eslint-config",
+  "version": "1.0.0",
+  "description": "Strict ESLint configuration for AI-generated code quality - mirrors Python package rules",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./flat": "./eslint.config.js",
+    "./legacy": "./.eslintrc.js"
+  },
+  "files": [
+    "index.js",
+    "eslint.config.js",
+    ".eslintrc.js",
+    "tsconfig.json",
+    ".prettierrc.js",
+    "README.md"
+  ],
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "typescript",
+    "linting",
+    "code-quality",
+    "ai-code",
+    "agentic",
+    "guardrails"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cajias/agentic-guardrails.git",
+    "directory": "typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/cajias/agentic-guardrails/issues"
+  },
+  "homepage": "https://github.com/cajias/agentic-guardrails#readme",
+  "peerDependencies": {
+    "eslint": ">=8.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-security": "^1.7.0",
+    "eslint-plugin-sonarjs": "^0.23.0",
+    "eslint-plugin-unicorn": "^50.0.0",
+    "eslint-plugin-promise": "^6.1.0",
+    "eslint-plugin-n": "^16.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0"
+  }
+}
