@@ -3,20 +3,20 @@
 # Use this as a reference configuration for all Python projects.
 
 [tool.ruff]
-line-length = 88
+line-length = 120
 target-version = "py39"
 
 [tool.ruff.lint]
-# Enable comprehensive linting for code quality and duplication detection
+# Enable comprehensive linting for code quality, duplication, and dead code detection
 select = [
     "E",     # pycodestyle errors
-    "F",     # Pyflakes
+    "F",     # Pyflakes (includes unused imports F401, unused variables F841)
     "I",     # isort (import sorting)
     "B",     # flake8-bugbear (common bugs)
     "W",     # pycodestyle warnings
     "C90",   # McCabe complexity
     "SIM",   # flake8-simplify (detect overly complex code)
-    "PIE",   # flake8-pie (miscellaneous lints)
+    "PIE",   # flake8-pie (miscellaneous lints, includes unused variables)
     "PLR",   # Pylint refactoring (duplicate code, too many args, etc.)
     "RET",   # flake8-return (return statement issues)
     "ANN",   # flake8-annotations (require type hints)
@@ -29,7 +29,7 @@ select = [
     "COM",   # flake8-commas
     "C4",    # flake8-comprehensions
     "DTZ",   # flake8-datetimez (timezone-aware datetime)
-    "T10",   # flake8-debugger
+    "T10",   # flake8-debugger (no debugger statements)
     "EM",    # flake8-errmsg
     "ISC",   # flake8-implicit-str-concat
     "ICN",   # flake8-import-conventions
@@ -40,16 +40,16 @@ select = [
     "RSE",   # flake8-raise
     "SLOT",  # flake8-slots
     "TID",   # flake8-tidy-imports
-    "TCH",   # flake8-type-checking
-    "ARG",   # flake8-unused-arguments
+    "TCH",   # flake8-type-checking (detect unused imports in type checking blocks)
+    "ARG",   # flake8-unused-arguments (detect unused function arguments)
     "PTH",   # flake8-use-pathlib
-    "ERA",   # eradicate (commented-out code)
+    "ERA",   # eradicate (detect commented-out code - DEAD CODE DETECTION)
     "PGH",   # pygrep-hooks
-    "PL",    # Pylint (all pylint rules)
+    "PL",    # Pylint (all rules, includes unreachable code W0101, pointless statements W0104)
     "TRY",   # tryceratops (exception handling)
     "FLY",   # flynt (f-string conversion)
     "PERF",  # Perflint (performance anti-patterns)
-    "RUF",   # Ruff-specific rules
+    "RUF",   # Ruff-specific rules (includes RUF100 - unused noqa comments)
 ]
 
 # Only ignore rules that conflict with Black or are false positives
@@ -96,7 +96,7 @@ force-single-line = false
 lines-after-imports = 2
 
 [tool.black]
-line-length = 88
+line-length = 120
 target-version = ["py39"]
 
 [tool.mypy]
@@ -141,7 +141,7 @@ disable = [
 ]
 
 [tool.pylint.format]
-max-line-length = 88  # Match Black
+max-line-length = 120  # Match Black
 
 [tool.pylint.similarities]
 # Minimum lines that constitute duplicate code

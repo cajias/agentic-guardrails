@@ -19,16 +19,17 @@ This repository provides canonical linting configurations with:
 Comprehensive linting for Python projects using:
 - **Ruff** - 40+ rule categories enabled
 - **MyPy** - Strict mode type checking
-- **Black** - Code formatting
-- **Pylint** - Duplicate code detection
+- **Black** - Code formatting (120 char lines)
+- **Pylint** - Duplicate code detection (4+ lines)
 - **80% coverage** required
 
 **Key features:**
 - Type hints everywhere
 - Docstrings required
 - Security checks (Bandit)
-- Complexity limits
-- No duplicate code
+- Complexity limits (max 10)
+- Dead code detection (unused imports, variables, arguments, commented code)
+- Code clone detection (min 4 similar lines)
 
 [View Python README →](./python/README.md)
 

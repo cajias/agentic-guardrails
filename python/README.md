@@ -51,7 +51,7 @@ If you're using Ruff, you can extend the base configuration:
 extend = "path/to/lint-configs/python/pyproject-linters.toml"
 
 # Override specific settings for your project
-line-length = 100  # If you need different from 88
+line-length = 100  # If you need different from 120
 ```
 
 **Note:** This only works for Ruff. You'll still need to copy the MyPy, Pylint, and other tool configurations.
@@ -233,9 +233,12 @@ This configuration provides:
 ### Ruff
 - **40+ rule categories** enabled
 - **Only 2 rules ignored** (Black conflicts: E203, E501)
+- **Line length**: 120 characters
 - **Per-file ignores** for test files
 - **Max complexity**: 10
 - **Max function args**: 5
+- **Dead code detection**: Unused imports, variables, arguments, commented code
+- **Code clone detection**: Via Pylint (minimum 4 lines)
 
 ### MyPy
 - **Strict mode** enabled
@@ -256,13 +259,54 @@ This configuration provides:
 
 1. **Type hints everywhere** - All functions must have type annotations
 2. **Docstrings required** - All public functions, classes, and methods need docstrings
-3. **No commented code** - Use git history instead
-4. **Security checks** - Catches common vulnerabilities
+3. **No commented code** - Use git history instead (ERA rules)
+4. **Security checks** - Catches common vulnerabilities (Bandit)
 5. **Complexity limits** - Functions must be simple (max complexity 10)
 6. **Modern Python** - Enforces current best practices
-7. **No duplicate code** - Catches copy-paste programming
+7. **No duplicate code** - Catches copy-paste programming (Pylint min 4 lines)
 8. **Pathlib usage** - Prefer pathlib over os.path
 9. **Proper exception handling** - Exception chaining required
+
+## Code Quality Detection
+
+### Dead Code Detection
+
+The configuration detects multiple types of dead code:
+
+- **Unused imports** (F401) - Imports that are never used
+- **Unused variables** (F841) - Variables assigned but never read
+- **Unused function arguments** (ARG001-005) - Parameters that are never used
+- **Commented-out code** (ERA001) - Code that should be removed or uncommented
+- **Unreachable code** (W0101) - Code after return/raise statements
+- **Pointless statements** (W0104) - Statements with no effect
+- **Unused noqa comments** (RUF100) - Unnecessary linter suppressions
+- **Unused type checking imports** (TCH004) - TYPE_CHECKING imports not used
+
+### Code Clone Detection
+
+Pylint's duplicate code detection catches copy-paste programming:
+
+- **Minimum similarity**: 4 lines of similar code triggers a warning
+- **Smart matching**: Ignores comments, docstrings, and imports
+- **Configurable**: Adjust `min-similarity-lines` if needed
+
+**Run duplicate detection:**
+```bash
+pylint --disable=all --enable=duplicate-code src/
+```
+
+**Example output:**
+```
+Similar lines in 2 files
+==UserManager:45
+==AdminManager:67
+  def validate_user(self, username: str) -> bool:
+      if not username:
+          return False
+      if len(username) < 3:
+          return False
+      return True
+```
 
 ## Migration from Looser Config
 
