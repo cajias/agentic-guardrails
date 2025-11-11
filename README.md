@@ -33,9 +33,27 @@ Comprehensive linting for Python projects using:
 
 [View Python README →](./python/README.md)
 
+### 🟦 [TypeScript/JavaScript](./typescript/)
+
+Comprehensive linting for JavaScript/TypeScript projects using:
+- **ESLint** - 200+ rules from multiple plugins
+- **TypeScript** - Strict mode type checking
+- **Prettier** - Code formatting (120 char lines)
+- **Multiple plugins** - Security, complexity, duplicate code detection
+
+**Key features:**
+- Explicit return types required
+- No implicit any
+- Security vulnerability detection
+- Complexity limits (max 10)
+- Dead code detection (unused vars, imports, commented code)
+- Duplicate code detection
+- Proper async/promise handling
+
+[View TypeScript/JavaScript README →](./typescript/README.md)
+
 ## Coming Soon
 
-- 🟦 **TypeScript/JavaScript** - ESLint, Prettier, TypeScript strict mode
 - ⚙️ **Go** - golangci-lint with comprehensive linters
 - 🦀 **Rust** - Clippy with all lints
 - ☕ **Java** - Checkstyle, SpotBugs, PMD
@@ -99,7 +117,7 @@ Use this repository as a GitHub template when creating new projects.
 ## Structure
 
 ```
-lint-configs/
+agentic-guardrails/
 ├── README.md                          # This file
 ├── LICENSE                            # MIT License
 ├── python/                            # Python linter configs
@@ -111,12 +129,14 @@ lint-configs/
 │       ├── __init__.py                # Package entry point
 │       └── python/
 │           └── pyproject-linters.toml # Linter rules (bundled)
-├── typescript/                        # Coming soon
-│   ├── README.md
-│   ├── package.json
-│   ├── .eslintrc.js
-│   ├── .prettierrc.js
-│   └── tsconfig.json
+├── typescript/                        # TypeScript/JavaScript configs
+│   ├── README.md                      # TypeScript-specific guide
+│   ├── package.json                   # NPM package configuration
+│   ├── index.js                       # Package entry point
+│   ├── eslint.config.js               # ESLint flat config (ESLint 9+)
+│   ├── .eslintrc.js                   # ESLint legacy config
+│   ├── .prettierrc.js                 # Prettier configuration
+│   └── tsconfig.json                  # TypeScript strict config
 ├── go/                                # Coming soon
 │   ├── README.md
 │   └── .golangci.yml
