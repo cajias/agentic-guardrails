@@ -14,7 +14,8 @@
     ".eslintrc.js",
     "tsconfig.json",
     ".prettierrc.js",
-    "README.md"
+    "README.md",
+    "docs/"
   ],
   "keywords": [
     "eslint",
