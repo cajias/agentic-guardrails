@@ -1,0 +1,24 @@
+# Test files
+**/*.test.js
+**/*.test.ts
+**/*.spec.js
+**/*.spec.ts
+**/test/**
+**/tests/**
+
+# Documentation (keep README)
+docs/
+
+# Development files
+.eslintcache
+.DS_Store
+*.log
+npm-debug.log*
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
