@@ -75,7 +75,7 @@ If you need different formatters for different file types:
 npm list eslint
 ```
 
-4. **Verify working directory:**
+1. **Verify working directory:**
    - ESLint extension must be able to find your config file
    - Check "eslint.workingDirectories" setting if using monorepo
 
@@ -299,13 +299,13 @@ export default [
 ];
 ```
 
-2. Run full type-check separately:
+1. Run full type-check separately:
 
 ```bash
 npm run type-check
 ```
 
-3. Increase IDE memory limits (check IDE docs)
+1. Increase IDE memory limits (check IDE docs)
 
 ### Prettier and ESLint Conflicts
 
@@ -330,7 +330,7 @@ This config already includes `eslint-config-prettier` to disable conflicting rul
 }
 ```
 
-2. **Exclude node_modules explicitly:**
+1. **Exclude node_modules explicitly:**
 
 ```javascript
 // eslint.config.js
@@ -342,7 +342,7 @@ export default [
 ];
 ```
 
-3. **Use ESLint cache:**
+1. **Use ESLint cache:**
 
 ```bash
 # In package.json scripts

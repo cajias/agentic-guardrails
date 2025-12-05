@@ -24,7 +24,7 @@ cp skill.md PROCEDURE.md TEMPLATE.md README.md ~/.claude/skills/readme-writer/
 
 In a Claude Code session:
 
-```
+```text
 You: Write a README for this project
 
 Claude: [Explores codebase, creates README following best practices]
@@ -32,7 +32,7 @@ Claude: [Explores codebase, creates README following best practices]
 
 Or for an existing README:
 
-```
+```text
 You: Improve this README
 
 Claude: [Reviews and enhances the README]
@@ -55,7 +55,7 @@ Every README must help users quickly answer:
 
 Structure information like an inverted funnel:
 
-```
+```text
 ┌─────────────────────────────────────┐
 │  Name + One-liner (everyone reads)  │
 ├─────────────────────────────────────┤
@@ -111,7 +111,7 @@ Extensive documentation belongs in separate files. The README is an entry point,
 
 ## Example Session
 
-```
+```text
 User: Write a README for this project
 
 Claude: Let me explore the codebase first...

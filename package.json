@@ -8,13 +8,17 @@
     "mcp-server"
   ],
   "scripts": {
-    "lint": "eslint . --ignore-pattern 'python/**'",
-    "lint:fix": "eslint . --fix --ignore-pattern 'python/**'",
-    "format": "prettier --write '**/*.{ts,tsx,js,jsx,json,md}' --ignore-path .gitignore",
-    "format:check": "prettier --check '**/*.{ts,tsx,js,jsx,json,md}' --ignore-path .gitignore",
+    "lint": "npm run lint:js && npm run lint:md",
+    "lint:js": "npx eslint . --ignore-pattern 'python/**'",
+    "lint:md": "npx markdownlint '**/*.md' --ignore node_modules --ignore '**/node_modules/**'",
+    "lint:fix": "npm run lint:js:fix && npm run lint:md:fix",
+    "lint:js:fix": "npx eslint . --fix --ignore-pattern 'python/**'",
+    "lint:md:fix": "npx markdownlint '**/*.md' --ignore node_modules --ignore '**/node_modules/**' --fix",
+    "format": "npx prettier --write '**/*.{ts,tsx,js,jsx,json,md}' --ignore-path .gitignore",
+    "format:check": "npx prettier --check '**/*.{ts,tsx,js,jsx,json,md}' --ignore-path .gitignore",
     "build": "npm run build --workspace=mcp-server",
-    "typecheck": "tsc --noEmit --project mcp-server/tsconfig.json",
-    "commitlint": "commitlint --edit",
+    "typecheck": "npx tsc --noEmit --project mcp-server/tsconfig.json",
+    "commitlint": "npx commitlint --edit",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -46,11 +50,15 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
+      "npx eslint --fix",
+      "npx prettier --write"
     ],
-    "*.{json,md}": [
-      "prettier --write"
+    "*.json": [
+      "npx prettier --write"
+    ],
+    "*.md": [
+      "npx markdownlint --fix",
+      "npx prettier --write"
     ]
   }
 }

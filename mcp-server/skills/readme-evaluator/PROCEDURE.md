@@ -109,7 +109,7 @@ art-of-readme recommends this flow:
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "Installation section appears before Usage"
 Why: Violates cognitive funneling - users want to evaluate before committing to install
 Fix: Move Usage section above Installation
@@ -125,7 +125,8 @@ Fix: Show actual code examples inline
 
 ### banesullivan Addition
 
-Highlights/Overview can appear before Usage - this is fine. The key is that users see the project working before being asked to install.
+Highlights/Overview can appear before Usage - this is fine. The key is that users see the project working before
+being asked to install.
 
 ---
 
@@ -142,7 +143,7 @@ Highlights/Overview can appear before Usage - this is fine. The key is that user
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "No description"
 Why: Users immediately leave if they don't know what this is
 Fix: Add a one-liner right after the title
@@ -169,7 +170,7 @@ Fix: Be specific: "Parse and modify URLs without urllib pain"
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "No usage example"
 Why: Users can't evaluate if the API fits their needs
 Fix: Add a minimal code example showing basic usage
@@ -193,7 +194,7 @@ Fix: Include all necessary imports
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "No installation instructions"
 Why: Users don't know how to get started
 Fix: Add npm install / pip install command
@@ -213,7 +214,7 @@ Fix: Show actual install command inline
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "No license"
 Why: Critical - users can't legally use the code
 Fix: Add License section with your chosen license
@@ -237,7 +238,7 @@ Fix: Create dedicated License section
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "API section before Usage"
 Why: Users need to see it working before diving into details
 Fix: Move Usage section above API
@@ -256,7 +257,7 @@ Fix: Show basic usage first, details later
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "No headers - wall of text"
 Why: Impossible to scan or navigate
 Fix: Add H2 headers for main sections
@@ -266,11 +267,12 @@ Fix: Add H2 headers for main sections
 
 **Per art-of-readme:**
 
-> "The ideal README is as short as it can be without being any shorter. Detailed documentation is good -- make separate pages for it! -- but keep your README succinct."
+> "The ideal README is as short as it can be without being any shorter. Detailed documentation is good -- make
+> separate pages for it! -- but keep your README succinct."
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "README contains full API reference"
 Why: Too much detail for a README
 Fix: Move to API.md or docs site, keep summary in README
@@ -294,7 +296,7 @@ Fix: Move to CONTRIBUTING.md
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "Uses 'the most amazing library'"
 Why: Marketing speak reduces credibility
 Fix: Remove superlatives. Describe what it does, not how great it is.
@@ -308,7 +310,7 @@ Fix: Focus on what YOUR project does
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "Uses jargon without explanation"
 Why: Not everyone knows domain-specific terms
 Fix: Either explain or link to explanation
@@ -328,7 +330,7 @@ banesullivan explicitly says: "You may be inclined to add development instructio
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "Development setup instructions in README"
 Why: Most users don't need this
 Fix: Move to CONTRIBUTING.md or DEVELOPMENT.md
@@ -353,7 +355,7 @@ Fix: Move to CONTRIBUTING.md or DEVELOPMENT.md
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "Many badges at the top"
 Why: Visual clutter
 Fix: Keep most useful (version, CI status, license)
@@ -367,7 +369,7 @@ Fix: Consider removing
 
 **Common problems:**
 
-```markdown
+```text
 Problem: "Same information repeated"
 Why: Wastes reader's time
 Fix: Remove duplicate content

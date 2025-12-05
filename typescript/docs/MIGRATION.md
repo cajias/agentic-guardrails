@@ -4,7 +4,8 @@ How to apply this strict ESLint configuration to an existing project.
 
 ## Overview
 
-This configuration is significantly stricter than most default ESLint setups. Applying it to an existing codebase will likely surface many issues. This guide helps you migrate incrementally.
+This configuration is significantly stricter than most default ESLint setups. Applying it to an existing codebase will
+likely surface many issues. This guide helps you migrate incrementally.
 
 ## Migration Steps
 
@@ -114,7 +115,8 @@ Delete unused:
 - Functions
 - Commented-out code
 
-**Tip:** If you're unsure whether code is used, commit your changes first, then delete it. You can always restore from git history.
+**Tip:** If you're unsure whether code is used, commit your changes first, then delete it. You can always restore from
+git history.
 
 #### 3.5 Fix Async Patterns
 

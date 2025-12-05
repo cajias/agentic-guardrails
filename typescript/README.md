@@ -1,6 +1,7 @@
 # ESLint Configuration for AI-Generated Code
 
-Comprehensive ESLint configuration for JavaScript/TypeScript projects with strict rules for security, code quality, and maintainability. Designed to keep AI-generated code in check with 220+ rules across multiple categories.
+Comprehensive ESLint configuration for JavaScript/TypeScript projects with strict rules for security, code quality,
+and maintainability. Designed to keep AI-generated code in check with 220+ rules across multiple categories.
 
 ## Highlights
 
@@ -266,7 +267,7 @@ function processLegacy(data: any): Result {
 
 ## Philosophy
 
-**"If it's worth enabling, it's worth enforcing everywhere."**
+> "If it's worth enabling, it's worth enforcing everywhere."
 
 This configuration:
 

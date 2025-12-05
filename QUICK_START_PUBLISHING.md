@@ -41,7 +41,7 @@ git push origin main
 git push origin v1.0.1
 ```
 
-### Step 3: That's It!
+### Step 3: That's It
 
 GitHub Actions will automatically:
 
@@ -87,7 +87,7 @@ Follow [Semantic Versioning](https://semver.org/):
 
 Want to make it available via `pip install sca-skills` (without git URL)?
 
-1. Create a PyPI API token at https://pypi.org/manage/account/token/
+1. Create a PyPI API token at <https://pypi.org/manage/account/token/>
 2. Add it to GitHub repository secrets:
    - Go to: Settings → Secrets and variables → Actions
    - Click "New repository secret"

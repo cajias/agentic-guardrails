@@ -8,7 +8,8 @@ The recommended way to use this configuration across all your projects.
 
 ## Method 1: Extend from Package (Recommended)
 
-Use Ruff's `extend` feature with the config bundled in the Python package. This approach provides version-managed configuration just like your other dependencies.
+Use Ruff's `extend` feature with the config bundled in the Python package. This approach provides version-managed
+configuration just like your other dependencies.
 
 ### Setup
 
@@ -51,7 +52,7 @@ pip install --upgrade sca-skills
 - ✅ **Zero manual downloads**: Everything through pip
 - ✅ **Rollback support**: Pin to specific versions if needed
 
-**Alternative: Environment Variable Approach**
+### Alternative: Environment Variable Approach
 
 If you prefer a home directory approach (useful for personal projects):
 
@@ -111,7 +112,8 @@ config_path = get_python_config_path()
 print(config_path)  # Use with --config flag
 ```
 
-**Note:** This approach requires using `--config` flags with every linting command, which is less convenient than Method 1's `extend` approach.
+**Note:** This approach requires using `--config` flags with every linting command, which is less convenient than
+Method 1's `extend` approach.
 
 ## Required Dependencies
 
@@ -270,14 +272,14 @@ repos:
         additional_dependencies: [types-all]
 ```
 
-2. Install:
+1. Install:
 
 ```bash
 pip install pre-commit
 pre-commit install
 ```
 
-3. Run manually:
+1. Run manually:
 
 ```bash
 pre-commit run --all-files
@@ -359,7 +361,7 @@ pylint --disable=all --enable=duplicate-code src/
 
 **Example output:**
 
-```
+```text
 Similar lines in 2 files
 ==UserManager:45
 ==AdminManager:67
@@ -415,6 +417,7 @@ If you're applying this to an existing project, follow these steps:
    ```
 
 5. **Add docstrings:**
+
    ```bash
    ruff check . --select=D
    # Add docstrings to public APIs
@@ -424,21 +427,21 @@ If you're applying this to an existing project, follow these steps:
 
 If you need to temporarily relax rules during migration:
 
-### For specific files:
+### For specific files
 
 ```toml
 [tool.ruff.lint.per-file-ignores]
 "legacy/**/*.py" = ["ANN", "D"]  # Skip type hints and docstrings in legacy code
 ```
 
-### For specific lines:
+### For specific lines
 
 ```python
 # Use sparingly!
 result = eval(user_input)  # noqa: S307 - Validated input
 ```
 
-### For entire project (not recommended):
+### For entire project (not recommended)
 
 ```toml
 [tool.ruff.lint]

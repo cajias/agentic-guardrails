@@ -6,7 +6,7 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/) t
 
 ### Format
 
-```
+```text
 <type>(<scope>): <subject>
 
 [optional body]

@@ -14,9 +14,11 @@ This skill activates when the user asks to:
 
 ## Core Philosophy
 
-> "Your job isn't to sell people on your work. It's to let them evaluate what your creation does as objectively as possible."
+> "Your job isn't to sell people on your work. It's to let them evaluate what your creation does as objectively as
+> possible."
 
-A great README enables users to quickly determine if a project meets their needs. The evaluator identifies what's preventing that.
+A great README enables users to quickly determine if a project meets their needs. The evaluator identifies what's
+preventing that.
 
 ## Guidelines Sources
 

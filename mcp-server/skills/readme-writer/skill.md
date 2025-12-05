@@ -17,7 +17,8 @@ This skill activates when the user asks to:
 
 > "Your documentation is a direct reflection of your software, so hold it to the same standards."
 
-A README is often the **only** exposure potential users have to your work. Your job isn't to "sell" people on your work—it's to let them evaluate what your creation does as objectively as possible.
+A README is often the **only** exposure potential users have to your work. Your job isn't to "sell" people on your
+work—it's to let them evaluate what your creation does as objectively as possible.
 
 ## Cognitive Funneling Principle
 

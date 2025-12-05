@@ -48,7 +48,7 @@ cp skill.md PROCEDURE.md README.md ~/.claude/skills/sca-guardrails/
 
 In a Claude Code session:
 
-```
+```text
 You: Run static analysis on this project
 
 Claude: [Assesses, fixes, and reports results]
@@ -139,7 +139,8 @@ Check if your project has a `tsconfig.json` - ESLint needs it for TypeScript fil
 
 ### Claude makes incorrect fixes
 
-The skill is designed to verify each fix. If a fix introduces new issues, Claude will try alternatives. For complex cases, issues are marked for manual review.
+The skill is designed to verify each fix. If a fix introduces new issues, Claude will try alternatives. For complex
+cases, issues are marked for manual review.
 
 ## License
 

@@ -372,11 +372,11 @@ ls eslint.config.js  # For ESLint 9+
 ls .eslintrc.js      # For ESLint 8
 ```
 
-2. **Check file name:**
+1. **Check file name:**
    - ESLint 9: `eslint.config.js` (flat config)
    - ESLint 8: `.eslintrc.js` or `.eslintrc.json`
 
-3. **Verify config is valid:**
+2. **Verify config is valid:**
 
 ```bash
 npx eslint --print-config src/index.ts
@@ -420,7 +420,7 @@ ESLint's TypeScript parser can't find `tsconfig.json`.
 ls tsconfig.json
 ```
 
-2. **Update parserOptions:**
+1. **Update parserOptions:**
 
 ```javascript
 export default [
@@ -434,7 +434,7 @@ export default [
 ];
 ```
 
-3. **For monorepos:**
+1. **For monorepos:**
 
 ```javascript
 parserOptions: {
@@ -462,14 +462,14 @@ This config already includes `eslint-config-prettier` to disable conflicting rul
 npm list eslint-config-prettier
 ```
 
-2. **Run Prettier first:**
+1. **Run Prettier first:**
 
 ```bash
 npx prettier --write .
 npx eslint . --fix
 ```
 
-3. **Check .prettierrc.js matches ESLint:**
+1. **Check .prettierrc.js matches ESLint:**
 
 ```javascript
 // .prettierrc.js should match ESLint's formatting expectations
@@ -500,7 +500,7 @@ Error: "Unable to resolve path to module" when import is valid.
 npm install
 ```
 
-2. **Check import resolver settings:**
+1. **Check import resolver settings:**
 
 ```javascript
 // eslint.config.js
@@ -516,7 +516,7 @@ export default [
 ];
 ```
 
-3. **Verify TypeScript paths:**
+1. **Verify TypeScript paths:**
 
 ```json
 // tsconfig.json
@@ -551,13 +551,13 @@ Different Node versions, cached files, or different dependencies.
     node-version: '20' # Match your local version
 ```
 
-2. **Use `npm ci` instead of `npm install`:**
+1. **Use `npm ci` instead of `npm install`:**
 
 ```yaml
 - run: npm ci
 ```
 
-3. **Don't cache .eslintcache:**
+1. **Don't cache .eslintcache:**
 
 ```yaml
 - uses: actions/cache@v3
@@ -566,7 +566,7 @@ Different Node versions, cached files, or different dependencies.
     # Don't cache .eslintcache
 ```
 
-4. **Run same commands locally:**
+1. **Run same commands locally:**
 
 ```bash
 # Exactly what CI runs

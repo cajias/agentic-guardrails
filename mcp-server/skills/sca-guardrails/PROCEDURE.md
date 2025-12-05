@@ -12,8 +12,8 @@ Detailed step-by-step workflow for fixing code quality issues.
 
 Call the lint tool to understand the current state:
 
-```
-sca.lint({ path: "." })
+```javascript
+sca.lint({ path: '.' });
 ```
 
 Parse the response:
@@ -29,8 +29,8 @@ If `summary.total === 0`, report success and exit.
 
 Run the automated fixers:
 
-```
-sca.fix({ path: "." })
+```javascript
+sca.fix({ path: '.' });
 ```
 
 This executes:
@@ -43,8 +43,8 @@ This executes:
 
 Lint again to see what remains:
 
-```
-sca.lint({ path: "." })
+```javascript
+sca.lint({ path: '.' });
 ```
 
 Now `summary.fixable` should be 0 or near 0.
@@ -59,8 +59,8 @@ For each issue where `claudeFixable: true`:
 
 ### 4.1 Read the File
 
-```
-Read({ file_path: issue.file })
+```javascript
+Read({ file_path: issue.file });
 ```
 
 Focus on the area around `issue.line`.
@@ -81,12 +81,12 @@ Based on `issue.rule`, determine the fix strategy:
 
 ### 4.3 Apply the Fix
 
-```
+```javascript
 Edit({
   file_path: issue.file,
-  old_string: "...",
-  new_string: "..."
-})
+  old_string: '...',
+  new_string: '...',
+});
 ```
 
 Ensure the fix:
@@ -99,8 +99,8 @@ Ensure the fix:
 
 Lint just that file:
 
-```
-sca.lint({ path: issue.file })
+```javascript
+sca.lint({ path: issue.file });
 ```
 
 If the issue is gone, move to the next issue.
@@ -110,7 +110,7 @@ If the issue persists, try an alternative approach or mark as manual.
 
 Update the todo list:
 
-```
+```javascript
 TodoWrite({
   todos: [
     { content: "Fix complexity in auth.ts", status: "completed", ... },
@@ -126,16 +126,17 @@ After all Claude-fixable issues are addressed:
 
 1. Run final lint:
 
-```
-sca.lint({ path: "." })
-```
+   ```javascript
+   sca.lint({ path: '.' });
+   ```
 
-2. Generate summary:
+1. Generate summary:
 
-```
+```markdown
 ## Code Quality Report
 
 ### Fixed Issues
+
 - X issues auto-fixed by linters
 - Y issues fixed by Claude:
   - Refactored complex function in src/auth.ts
@@ -143,15 +144,17 @@ sca.lint({ path: "." })
   - Removed dead code in src/utils.ts
 
 ### Remaining Issues (Manual Review Required)
+
 - src/legacy.ts:42 - Deprecated API usage (requires migration)
 - src/config.ts:15 - Circular dependency (requires architecture change)
 
 ### Statistics
+
 - Total issues found: N
 - Auto-fixed: X
 - Claude-fixed: Y
 - Manual: Z
-- Success rate: ((X + Y) / N) * 100%
+- Success rate: ((X + Y) / N) \* 100%
 ```
 
 ## Error Handling
@@ -196,7 +199,7 @@ sca.lint({ path: "." })
 
 ## Example Session
 
-```
+```text
 User: "Run static analysis on this project"
 
 Claude: Let me assess the code quality.

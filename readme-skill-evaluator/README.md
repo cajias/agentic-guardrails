@@ -21,7 +21,7 @@ cp skill.md PROCEDURE.md README.md ~/.claude/skills/readme-evaluator/
 
 ## Usage
 
-```
+```text
 You: Evaluate this README
 
 Claude: [Reads README, identifies problems, explains fixes]

@@ -27,7 +27,7 @@ Determine what kind of project this is:
 
 Read these files to understand the project:
 
-```
+```text
 1. package.json / pyproject.toml / Cargo.toml  → Name, description, dependencies
 2. src/index.* or lib/*                         → Main exports, API surface
 3. bin/* or cli.*                               → CLI commands

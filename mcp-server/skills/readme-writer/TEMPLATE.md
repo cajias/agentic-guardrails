@@ -2,9 +2,7 @@
 
 Copy this template and fill in the sections. Delete any optional sections you don't need.
 
----
-
-# {project-name}
+## {project-name}
 
 > {One-liner description - max 120 characters}
 
@@ -63,7 +61,7 @@ Contributions welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
-# Template Variants
+## Template Variants
 
 ## Minimal (Library)
 
