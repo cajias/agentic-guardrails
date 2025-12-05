@@ -46,4 +46,4 @@ def get_ruff_config_path() -> Path:
     return _PACKAGE_DIR / "ruff.toml"
 
 
-__all__ = ["get_python_config_path", "get_ruff_config_path", "__version__"]
+__all__ = ["__version__", "get_python_config_path", "get_ruff_config_path"]
