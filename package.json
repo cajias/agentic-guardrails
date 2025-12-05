@@ -1,0 +1,52 @@
+{
+  "name": "agentic-guardrails",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered code quality guardrails with linter configs, MCP server, and Claude skill",
+  "workspaces": [
+    "typescript",
+    "mcp-server"
+  ],
+  "scripts": {
+    "lint": "eslint . --ignore-pattern 'python/**'",
+    "lint:fix": "eslint . --fix --ignore-pattern 'python/**'",
+    "format": "prettier --write '**/*.{ts,tsx,js,jsx,json,md}' --ignore-path .gitignore",
+    "format:check": "prettier --check '**/*.{ts,tsx,js,jsx,json,md}' --ignore-path .gitignore",
+    "build": "npm run build --workspace=mcp-server",
+    "typecheck": "tsc --noEmit --project mcp-server/tsconfig.json",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^10.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-n": "^17.15.0",
+    "eslint-plugin-no-only-tests": "^3.3.0",
+    "eslint-plugin-prettier": "^5.5.0",
+    "eslint-plugin-promise": "^7.2.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-sonarjs": "^3.0.5",
+    "eslint-plugin-unicorn": "^56.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.1",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}

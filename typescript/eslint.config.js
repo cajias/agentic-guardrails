@@ -11,12 +11,17 @@ const unicornPlugin = require('eslint-plugin-unicorn');
 const promisePlugin = require('eslint-plugin-promise');
 const nodePlugin = require('eslint-plugin-n');
 const prettierConfig = require('eslint-config-prettier');
+const prettierPlugin = require('eslint-plugin-prettier');
+const noOnlyTestsPlugin = require('eslint-plugin-no-only-tests');
+const reactPlugin = require('eslint-plugin-react');
+const reactHooksPlugin = require('eslint-plugin-react-hooks');
+const jsxA11yPlugin = require('eslint-plugin-jsx-a11y');
 
 module.exports = [
   {
     // Files to lint
     files: ['**/*.{js,mjs,cjs,ts,tsx}'],
-    
+
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
@@ -40,12 +45,14 @@ module.exports = [
 
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      'import': importPlugin,
-      'security': securityPlugin,
-      'sonarjs': sonarjsPlugin,
-      'unicorn': unicornPlugin,
-      'promise': promisePlugin,
-      'n': nodePlugin,
+      import: importPlugin,
+      security: securityPlugin,
+      sonarjs: sonarjsPlugin,
+      unicorn: unicornPlugin,
+      promise: promisePlugin,
+      n: nodePlugin,
+      prettier: prettierPlugin,
+      'no-only-tests': noOnlyTestsPlugin,
     },
 
     rules: {
@@ -64,11 +71,14 @@ module.exports = [
       // ============================================================
       // TYPESCRIPT STRICT CHECKS (mirrors Python ANN/mypy)
       // ============================================================
-      '@typescript-eslint/explicit-function-return-type': ['error', {
-        allowExpressions: false,
-        allowTypedFunctionExpressions: true,
-        allowHigherOrderFunctions: true,
-      }],
+      '@typescript-eslint/explicit-function-return-type': [
+        'error',
+        {
+          allowExpressions: false,
+          allowTypedFunctionExpressions: true,
+          allowHigherOrderFunctions: true,
+        },
+      ],
       '@typescript-eslint/explicit-module-boundary-types': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unsafe-assignment': 'error',
@@ -85,22 +95,25 @@ module.exports = [
       // DEAD CODE DETECTION (mirrors Python F401, F841, ERA, ARG)
       // ============================================================
       'no-unused-vars': 'off', // Use TypeScript version
-      '@typescript-eslint/no-unused-vars': ['error', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       '@typescript-eslint/no-unused-expressions': 'error',
       'no-unreachable': 'error',
       'no-constant-condition': 'error',
       'no-useless-return': 'error',
       'no-useless-escape': 'error',
       // Note: unicorn/no-commented-out-code requires v51+ (commented code detection)
-      
+
       // ============================================================
       // COMPLEXITY LIMITS (mirrors Python C90, PLR)
       // ============================================================
-      'complexity': ['error', 10], // Max cyclomatic complexity
+      complexity: ['error', 10], // Max cyclomatic complexity
       'max-depth': ['error', 4], // Max nesting depth
       'max-lines-per-function': ['error', { max: 50, skipBlankLines: true, skipComments: true }],
       'max-params': ['error', 5], // Max function parameters
@@ -123,18 +136,18 @@ module.exports = [
       // ============================================================
       // CODE QUALITY & BEST PRACTICES
       // ============================================================
-      
+
       // Avoid common bugs (mirrors Python B, PIE)
-      'eqeqeq': ['error', 'always'], // Require === and !==
+      eqeqeq: ['error', 'always'], // Require === and !==
       'no-var': 'error', // Use let/const
       'prefer-const': 'error',
       'no-eval': 'error',
       'no-implied-eval': 'error',
       'no-new-func': 'error',
       '@typescript-eslint/no-implied-eval': 'error',
-      
+
       // Naming conventions (mirrors Python N)
-      'camelcase': ['error', { properties: 'never', ignoreDestructuring: true }],
+      camelcase: ['error', { properties: 'never', ignoreDestructuring: true }],
       '@typescript-eslint/naming-convention': [
         'error',
         {
@@ -165,20 +178,14 @@ module.exports = [
       'require-atomic-updates': 'error',
 
       // Import organization (mirrors Python I, isort)
-      'import/order': ['error', {
-        'groups': [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
-        'newlines-between': 'always',
-        'alphabetize': { order: 'asc', caseInsensitive: true },
-      }],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
       'import/no-duplicates': 'error',
       'import/no-unresolved': 'error',
       'import/no-cycle': 'error',
@@ -271,6 +278,11 @@ module.exports = [
       'unicorn/prefer-string-trim-start-end': 'error',
       'unicorn/prefer-type-error': 'error',
       'unicorn/throw-new-error': 'error',
+
+      // ============================================================
+      // PRETTIER INTEGRATION
+      // ============================================================
+      'prettier/prettier': 'error',
     },
   },
 
@@ -284,6 +296,8 @@ module.exports = [
       'sonarjs/no-duplicate-string': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       'unicorn/no-null': 'off',
+      // Prevent .only() in tests from being committed
+      'no-only-tests/no-only-tests': 'error',
     },
   },
 
@@ -294,6 +308,80 @@ module.exports = [
       'no-console': 'off',
       '@typescript-eslint/no-var-requires': 'off',
       'unicorn/prefer-module': 'off',
+    },
+  },
+
+  // React/JSX files - additional rules for React projects
+  {
+    files: ['**/*.tsx', '**/*.jsx'],
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        React: 'readonly',
+        JSX: 'readonly',
+      },
+    },
+    rules: {
+      // React hooks rules (critical for correctness)
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      // Accessibility rules
+      'jsx-a11y/alt-text': 'error',
+      'jsx-a11y/anchor-has-content': 'error',
+      'jsx-a11y/anchor-is-valid': 'error',
+      'jsx-a11y/aria-props': 'error',
+      'jsx-a11y/aria-proptypes': 'error',
+      'jsx-a11y/aria-role': 'error',
+      'jsx-a11y/aria-unsupported-elements': 'error',
+      'jsx-a11y/click-events-have-key-events': 'error',
+      'jsx-a11y/heading-has-content': 'error',
+      'jsx-a11y/html-has-lang': 'error',
+      'jsx-a11y/img-redundant-alt': 'error',
+      'jsx-a11y/interactive-supports-focus': 'error',
+      'jsx-a11y/label-has-associated-control': 'error',
+      'jsx-a11y/no-access-key': 'error',
+      'jsx-a11y/no-autofocus': 'warn',
+      'jsx-a11y/no-distracting-elements': 'error',
+      'jsx-a11y/no-interactive-element-to-noninteractive-role': 'error',
+      'jsx-a11y/no-noninteractive-element-interactions': 'error',
+      'jsx-a11y/no-noninteractive-element-to-interactive-role': 'error',
+      'jsx-a11y/no-redundant-roles': 'error',
+      'jsx-a11y/no-static-element-interactions': 'error',
+      'jsx-a11y/role-has-required-aria-props': 'error',
+      'jsx-a11y/role-supports-aria-props': 'error',
+      'jsx-a11y/scope': 'error',
+      'jsx-a11y/tabindex-no-positive': 'error',
+      // React best practices
+      'react/jsx-no-target-blank': 'error',
+      'react/jsx-no-duplicate-props': 'error',
+      'react/jsx-no-undef': 'error',
+      'react/jsx-uses-react': 'error',
+      'react/jsx-uses-vars': 'error',
+      'react/no-children-prop': 'error',
+      'react/no-danger-with-children': 'error',
+      'react/no-deprecated': 'error',
+      'react/no-direct-mutation-state': 'error',
+      'react/no-find-dom-node': 'error',
+      'react/no-is-mounted': 'error',
+      'react/no-render-return-value': 'error',
+      'react/no-string-refs': 'error',
+      'react/no-unescaped-entities': 'error',
+      'react/no-unknown-property': 'error',
+      'react/require-render-return': 'error',
     },
   },
 
