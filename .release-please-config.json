@@ -11,18 +11,18 @@
     "python": {
       "release-type": "python",
       "package-name": "sca-skills",
-      "changelog-path": "CHANGELOG.md",
-      "extra-files": ["python/pyproject.toml"]
+      "changelog-path": "python/CHANGELOG.md",
+      "extra-files": ["pyproject.toml"]
     },
     "typescript": {
       "release-type": "node",
       "package-name": "@sca-skills/eslint-config",
-      "changelog-path": "CHANGELOG.md"
+      "changelog-path": "typescript/CHANGELOG.md"
     },
     "mcp-server": {
       "release-type": "node",
       "package-name": "@cajias/sca-mcp",
-      "changelog-path": "CHANGELOG.md"
+      "changelog-path": "mcp-server/CHANGELOG.md"
     }
   },
   "plugins": [

@@ -60,7 +60,8 @@ jobs:
       - name: Type check Python with MyPy
         run: |
           cd python
-          mypy --install-types --non-interactive . || true
+          # TODO: Remove || true once type coverage is complete
+          mypy --install-types --non-interactive . || echo "⚠️ Type checking found issues but continuing for now"
 
   test-install:
     runs-on: ubuntu-latest
@@ -79,7 +80,11 @@ jobs:
         run: |
           cd typescript
           npm pack
-          npm install -g $(ls *.tgz)
+          mkdir -p /tmp/test-ts-install
+          cp *.tgz /tmp/test-ts-install/
+          cd /tmp/test-ts-install
+          npm init -y
+          npm install ./$(ls *.tgz)
           echo "✅ TypeScript package installs successfully"
 
       - name: Set up Python

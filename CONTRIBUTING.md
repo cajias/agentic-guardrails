@@ -94,7 +94,11 @@ Commit messages are validated using [commitlint](https://commitlint.js.org/). In
 To test your commit message before committing:
 
 ```bash
-echo "feat: add new feature" | npx commitlint
+# Validate the last commit message
+npx commitlint --from HEAD~1
+
+# Or validate a message directly via stdin
+echo "feat: add new feature" | npx commitlint --stdin
 ```
 
 ## Release Process

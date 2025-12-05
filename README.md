@@ -28,8 +28,18 @@ mypy .
 ```bash
 # 1. Authenticate with GitHub Packages (one-time setup)
 # Create a Personal Access Token at https://github.com/settings/tokens
-# with 'read:packages' scope, then:
-echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
+# with 'read:packages' scope
+
+# Recommended: Use npm login (secure, prompts for credentials)
+npm login --registry=https://npm.pkg.github.com
+
+# Alternative (NOT RECOMMENDED for local use):
+# ⚠️ SECURITY WARNING: This stores your token in plain text in ~/.npmrc
+# - Never commit ~/.npmrc to version control
+# - The token will be readable by anyone with access to your home directory
+# - Prefer npm login or environment variables for local development
+# - Only use this method in secure CI/CD environments
+# echo "//npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> ~/.npmrc
 
 # 2. Configure npm to use GitHub Packages for @sca-skills scope
 echo "@sca-skills:registry=https://npm.pkg.github.com" >> ~/.npmrc
