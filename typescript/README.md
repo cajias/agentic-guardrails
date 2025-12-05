@@ -312,7 +312,6 @@ All plugins are bundled as dependencies for easier installation.
 
 - **Issues:** [GitHub Issues](https://github.com/cajias/sca-skills/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/cajias/sca-skills/discussions)
-- **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
 
 ## Contributing
 

@@ -232,7 +232,6 @@ module.exports = [
 
       // Module loading best practices
       'n/no-new-require': 'error', // Disallow new require()
-      'n/exports-style': ['error', 'module.exports'], // Consistent export style
 
       // Performance warnings
       'n/no-sync': 'warn', // Warn about blocking operations (fs.readFileSync, etc.)
@@ -335,6 +334,9 @@ module.exports = [
       'sonarjs/no-duplicate-string': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       'unicorn/no-null': 'off',
+      // Allow importing test frameworks and devDependencies in tests
+      'n/no-unpublished-import': 'off',
+      'n/no-unpublished-require': 'off',
       // Prevent .only() in tests from being committed
       'no-only-tests/no-only-tests': 'error',
     },
@@ -347,6 +349,9 @@ module.exports = [
       'no-console': 'off',
       '@typescript-eslint/no-var-requires': 'off',
       'unicorn/prefer-module': 'off',
+      // Allow using devDependencies in build scripts and config files
+      'n/no-unpublished-import': 'off',
+      'n/no-unpublished-require': 'off',
     },
   },
 
