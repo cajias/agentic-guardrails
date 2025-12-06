@@ -20,6 +20,11 @@
       "package-name": "@sca-skills/eslint-config",
       "changelog-path": "typescript/CHANGELOG.md"
     },
+    "markdown": {
+      "release-type": "node",
+      "package-name": "@sca-skills/markdownlint-config",
+      "changelog-path": "markdown/CHANGELOG.md"
+    },
     "mcp-server": {
       "release-type": "node",
       "package-name": "@cajias/sca-mcp",

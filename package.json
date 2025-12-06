@@ -5,6 +5,7 @@
   "description": "Claude Code skills for static code analysis",
   "workspaces": [
     "typescript",
+    "markdown",
     "mcp-server"
   ],
   "scripts": {
