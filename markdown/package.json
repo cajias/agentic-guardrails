@@ -1,7 +1,7 @@
 {
   "name": "@sca-skills/markdownlint-config",
   "version": "1.0.0",
-  "description": "Strict markdownlint configuration for static code analysis",
+  "description": "Comprehensive markdownlint configuration for static code analysis",
   "main": ".markdownlint.json",
   "files": [
     ".markdownlint.json",
